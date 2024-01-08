@@ -1,0 +1,322 @@
+{% include "dashboard_header.html" %}
+
+<!-- page content -->
+<div class="right_col" role="main">
+  <div class="">
+    <div class="page-title">
+      <div class="title_left">
+        <h3>Modules</h3>
+      </div>
+
+      <div class="title_right">
+        <div class="col-md-5 col-sm-5   form-group pull-right top_search">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for...">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">Go!</button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- DFFN -->
+    <div class="row x_title mt-5">
+      <div class="col-md-12 mb-3 text-center">
+        <h3>Kidney Disease Predictor, <small>a model that classifies the kidney condtion.</small></h3>
+      </div>
+
+
+      <!-- INPUT  -->
+      <div class="col-md-6 col-sm-12 ">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>Kidney Disease Predictor</h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <p>
+              Drag and drop the image of the kidney to the box below or click to select file.
+            </p>
+            <form action="/dffn" class="dropzone text-center" id="dffnFormInput"></form>
+            <br />
+          </div>
+        </div>
+      </div>
+      <!-- INPUT  -->
+
+      <!-- OUTPUT -->
+      <div class="col-md-6 col-sm-12 ">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>Prediction</h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <h3 id="prediction"></h3>
+          </div>
+        </div>
+      </div>
+      <!-- OUTPUT -->
+    </div>
+    <!-- DFFN -->
+
+
+
+    <!-- COX -->
+    <div class="row x_title mt-5">
+      <div class="col-md-12 mb-3 text-center">
+        <h3>Kidney Wait-Time Predictor, <small>a model that predicts the probable wait time for viable kidney
+            donor availability.</small>
+        </h3>
+      </div>
+
+
+      <!-- INPUT  -->
+      <div class="col-md-6 col-sm-12 ">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>Kidney Wait-Time Predictor</h2>
+            <div class="clearfix"></div>
+          </div>
+          <form action="/cox" method="post" id="cox_input_form">
+            <div class="x_content">
+              <div class="form-group row">
+                <label class="col-form-label col-md-3 col-sm-3 ">Age</label>
+                <div class="col-md-3 col-sm-3 ">
+                  <input name="age_at_list_registration" type="text" class="form-control" value="88"
+                    id="age_at_list_registration">
+                </div>
+                <label class="col-form-label col-md-3 col-sm-3 ">Gender</label>
+                <div class="col-md-3 col-sm-3 ">
+                  <input name="gender" type="text" class="form-control" value="F" id="gender">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-form-label col-md-3 col-sm-3 ">Dialysis duration</label>
+                <div class="col-md-3 col-sm-3 ">
+                  <input name="dialysis_duration" type="text" class="form-control" value="1" id="dialysis_duration">
+                </div>
+                <label class="col-form-label col-md-3 col-sm-3 ">Blood Grp</label>
+                <div class="col-md-3 col-sm-3 ">
+                  <input type="text" class="form-control" value="A" name="blood_gp" id="blood_gp">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-form-label col-md-3 col-sm-3 ">Age Cat</label>
+                <div class="col-md-3 col-sm-3 ">
+                  <input type="text" class="form-control" value="Over60" name="age_cat" id="age_cat">
+                </div>
+                <label class="col-form-label col-md-3 col-sm-3 ">cPRA</label>
+                <div class="col-md-3 col-sm-3 ">
+                  <input type="text" class="form-control" value="3" name="cPRA" id="cPRA">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-form-label col-md-3 col-sm-3 ">HLA_A1</label>
+                <div class="col-md-3 col-sm-3 ">
+                  <input type="text" class="form-control" value="5" name="HLA_A1" id="HLA_A1">
+                </div>
+                <label class="col-form-label col-md-3 col-sm-3 ">HLA_A2</label>
+                <div class="col-md-3 col-sm-3 ">
+                  <input type="text" class="form-control" value="9" name="HLA_A2" id="HLA_A2">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-form-label col-md-3 col-sm-3 ">HLA_B1</label>
+                <div class="col-md-3 col-sm-3 ">
+                  <input type="text" class="form-control" value="0" name="HLA_B1" id="HLA_B1">
+                </div>
+                <label class="col-form-label col-md-3 col-sm-3 ">HLA_B2</label>
+                <div class="col-md-3 col-sm-3 ">
+                  <input type="text" class="form-control" value="8" name="HLA_B2" id="HLA_B2">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-form-label col-md-3 col-sm-3 ">HLA_DR1</label>
+                <div class="col-md-3 col-sm-3 ">
+                  <input type="text" class="form-control" value="80" name="HLA_DR1" id="HLA_DR1">
+                </div>
+                <label class="col-form-label col-md-3 col-sm-3 ">HLA_DR2</label>
+                <div class="col-md-3 col-sm-3 ">
+                  <input type="text" class="form-control" value="50" name="HLA_DR2" id="HLA_DR2">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-form-label col-md-3 col-sm-3 ">c_PRA_cat</label>
+                <div class="col-md-3 col-sm-3 ">
+                  <input type="text" class="form-control" value="Over80" name="cPRA_cat" id="cPRA_cat">
+                </div>
+                <label class="col-form-label col-md-3 col-sm-3 ">Gestation</label>
+                <div class="col-md-3 col-sm-3 ">
+                  <input type="text" class="form-control" value="NO" name="gestation" id="gestation">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-form-label col-md-3 col-sm-3 ">Prior_Transplant</label>
+                <div class="col-md-3 col-sm-3 ">
+                  <input type="text" class="form-control" value="YES" name="prior_transplant" id="prior_transplant">
+                </div>
+                <label class="col-form-label col-md-3 col-sm-3 ">Underlying Disease</label>
+                <div class="col-md-3 col-sm-3 ">
+                  <input type="text" class="form-control" value="others" name="underlying_disease"
+                    id="underlying_disease">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-form-label col-md-3 col-sm-3 ">number_prior_transplant</label>
+                <div class="col-md-3 col-sm-3 ">
+                  <input type="text" class="form-control" value="4" name="number_prior_transplant"
+                    id="number_prior_transplant">
+                </div>
+                <label class="col-form-label col-md-3 col-sm-3 ">if_transplanted</label>
+                <div class="col-md-3 col-sm-3 ">
+                  <input type="text" class="form-control" value="0" name="if_transplanted" id="if_transplanted">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-form-label col-md-3 col-sm-3 ">duration</label>
+                <div class="col-md-3 col-sm-3 ">
+                  <input type="text" class="form-control" value="14" name="duration" id="duration">
+                </div>
+                <label class="col-form-label col-md-3 col-sm-3 ">log_time_on_Dialysis</label>
+                <div class="col-md-3 col-sm-3 ">
+                  <input type="text" class="form-control" value="12" name="log_time_on_Dialysis"
+                    id="log_time_on_Dialysis">
+                </div>
+              </div>
+
+            </div>
+
+            <div class="form-group row">
+              <div class="col-md-12 col-sm-12">
+                <input type="submit" class="form-control" value="Get Wait-Time"
+                  style="background-color: #2A3F54; color: #fff;">
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+      <!-- INPUT  -->
+
+      <!-- OUTPUT -->
+      <div class="col-md-6 col-sm-12 ">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>Prediction</h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <h3 id="cox_prediction"></h3>
+          </div>
+        </div>
+      </div>
+      <!-- OUTPUT -->
+    </div>
+    <!-- COX -->
+
+
+
+    <!-- CHATBOT  -->
+    <div class="row x_title mt-2">
+      <div class="col-md-12 text-center">
+        <h3>Meet Loki, <small>An AI chatbot to solve all your kidney organ donation queries.</small></h3>
+      </div>
+      <div class="col-md-12">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+        <div class="container">
+          <div class="row clearfix">
+            <div class="col-lg-12">
+              <div class="card chat-app">
+
+                <div id="plist" class="people-list">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fa fa-search"></i></span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Search...">
+                  </div>
+                  <ul class="list-unstyled chat-list mt-2 mb-0">
+                    <li class="clearfix active">
+                      <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar">
+                      <div class="about">
+                        <div class="name">Loki Bot</div>
+                        <div class="status"> <i class="fa fa-circle online"></i> Active </div>
+                      </div>
+                    </li>
+
+                  </ul>
+                </div>
+
+                <div class="chat">
+                  <div class="chat-header clearfix ">
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
+                          <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar">
+                        </a>
+
+                        <div class="chat-about">
+                          <h6 class="m-b-0">Loki Bot</h6>
+                          <small>Last seen: now</small>
+                        </div>
+
+                      </div>
+                      <div class="col-lg-6 hidden-sm text-right">
+                        <a href="javascript:void(0);" class="btn btn-outline-secondary"><i class="fa fa-camera"></i></a>
+                        <a href="javascript:void(0);" class="btn btn-outline-primary"><i class="fa fa-image"></i></a>
+                        <a href="javascript:void(0);" class="btn btn-outline-info"><i class="fa fa-cogs"></i></a>
+                        <a href="javascript:void(0);" class="btn btn-outline-warning"><i class="fa fa-question"></i></a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="chat-history" id="chat_container">
+                    <ul class="m-b-0" id="chat_history">
+                    </ul>
+                  </div>
+
+
+
+                  <div class="chat-message clearfix">
+                    <div class="input-group mb-0">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-send"></i></span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Enter query here..." id="chatbot_user_input">
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- CHATBOT  -->
+
+
+
+
+  </div>
+
+</div>
+<!-- /page content -->
+
+
+{% include "dashboard_footer.html" %}

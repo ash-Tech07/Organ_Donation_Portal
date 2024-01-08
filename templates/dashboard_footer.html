@@ -1,0 +1,47 @@
+<!-- footer content -->
+<footer>
+    <div class="pull-right">
+        Developed by Ashwin, Aakash and Aditya.
+    </div>
+    <div class="clearfix"></div>
+</footer>
+<!-- /footer content -->
+</div>
+</div>
+
+<!-- jQuery -->
+<script src="{{ url_for('static', filename='vendors/jquery/dist/jquery.min.js') }}"></script>
+<!-- Bootstrap -->
+<script src="{{ url_for('static', filename='vendors/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script> -->
+<!-- FastClick -->
+<script src="{{ url_for('static', filename='vendors/fastclick/lib/fastclick.js') }}"></script>
+<!-- NProgress -->
+<script src="{{ url_for('static', filename='vendors/nprogress/nprogress.js') }}"></script>
+<!-- Dropzone.js -->
+<script src="{{ url_for('static', filename='vendors/dropzone/dist/min/dropzone.min.js') }}"></script>
+<!-- gauge.js -->
+<script src="{{ url_for('static', filename='vendors/gauge.js/dist/gauge.min.js') }}"></script>
+
+<!-- Custom Theme Scripts -->
+<script src="{{ url_for('static', filename='build/js/custom.min.js') }}"></script>
+
+<!-- Custom Scripts -->
+
+<!-- Notification Scripts  -->
+{% if show_notification %}
+    <!-- Custom Notifications Scripts -->
+    <script src="{{ url_for('static', filename='build/js/show_notification.js') }}"></script>
+{% endif %}
+<!-- Custom ChatBot Scripts -->
+<script src="{{ url_for('static', filename='build/js/chatbot.js') }}"></script>
+<!-- Custom DFFN Scripts -->
+<script src="{{ url_for('static', filename='build/js/dffn.js') }}"></script>
+<!-- Custom COX Scripts -->
+<script src="{{ url_for('static', filename='build/js/cox.js') }}"></script>
+
+
+</body>
+
+</html>
