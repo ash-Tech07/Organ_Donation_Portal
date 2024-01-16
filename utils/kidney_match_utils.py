@@ -77,3 +77,5 @@ def get_viable_score(receiver_data, donor_data):
     score = get_blood_group_compatability(receiver_blood_group=receiver_data['blood_group'], donor_blood_group=donor_data['blood_group']) * BLOOD_GROUP_WEIGHTAGE 
     + get_location_compatability(receiver_location=receiver_data['location'], donor_location=donor_data['location']) * LOCATION_WEIGHTAGE
     return score
+
+

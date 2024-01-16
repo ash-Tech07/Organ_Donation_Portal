@@ -1,8 +1,7 @@
-from utils.db_utils import db
 from flask import render_template, request, redirect, make_response, Blueprint
-from utils.common_functions import is_first_time_register, is_user_valid, set_user_role, set_user_session_key
-from utils.constants import DONOR, LOGIN_ERROR_MSG, REGISTRATION_FAILURE_MESSAGE, REGISTRATION_NOT_APPLICABLE_MESSAGE, REGISTRATION_SUCCESS_MESSAGE, SESSION_COOKIE, SHOW_NOTIFICATION, TEST_IMAGES_PATH, USERNAME_COOKIE
-from utils.db_utils import add_new_user, get_user_session_key
+from utils.common_functions import is_first_time_register, is_user_valid, set_user_role, set_user_session_key_and_redirect_to_dashboard
+from utils.constants import DONOR, LOGIN_ERROR_MSG, RECEIVER, REGISTRATION_FAILURE_MESSAGE, REGISTRATION_NOT_APPLICABLE_MESSAGE, REGISTRATION_SUCCESS_MESSAGE, SESSION_COOKIE, SHOW_NOTIFICATION, TEST_IMAGES_PATH, USERNAME_COOKIE
+from utils.db_utils import add_new_user
 from utils.chatbot_utils import chatbot_response
 from utils.cox_utils import predict_wait_time
 from utils.dffn_utils import predict_kidney_diesease
@@ -14,24 +13,23 @@ routes = Blueprint('routes', __name__)
 
 
 # Register as Donor
-@routes.route('/registerAsDonor', methods=['GET'])
+@routes.route('/register', methods=['POST'])
 def register_user_as_donor():
     if is_user_valid(request=request) and is_first_time_register(request.cookies.get(USERNAME_COOKIE)):
-        if set_user_role(username=request.cookies.get(USERNAME_COOKIE), role=DONOR):
+        if set_user_role(username=request.cookies.get(USERNAME_COOKIE), role=list(request.form.keys())[0]):
             return redirect(f'/dashboard?{SHOW_NOTIFICATION}=success')
         else:
             return redirect(f'/dashboard?{SHOW_NOTIFICATION}=failure')
     else:
         return redirect(f'/dashboard?{SHOW_NOTIFICATION}=notApplicable')
-    
-
 
 
 # User Sign Up
 @routes.route('/createNewUser', methods=['POST'])
 def create_new_user():
-    if add_new_user(user_information=request.form, db=db):
-        return get_user_session_key()
+    if add_new_user(user_information=request.form):
+        # user_session_key = get_user_session_key(username=request.form['username'])
+        return set_user_session_key_and_redirect_to_dashboard()
     else:
         return render_template('login.html')    
 
@@ -45,8 +43,8 @@ def login():
 # login route 
 @routes.route('/login', methods=['POST'])
 def login_user():
-    if validate_user(user_information=request.form, db=db):
-        return set_user_session_key()
+    if validate_user(user_information=request.form):
+        return set_user_session_key_and_redirect_to_dashboard()
     
     return render_template('login.html', login_error_msg = LOGIN_ERROR_MSG) 
 
@@ -98,7 +96,7 @@ def get_wait_time():
 @routes.route('/logout')
 def logout_user():
     response = make_response(redirect('/login'))
-    update_user_session_key(username=request.cookies.get(USERNAME_COOKIE), session_key='', db=db)
+    update_user_session_key(username=request.cookies.get(USERNAME_COOKIE), session_key='')
     response.set_cookie(USERNAME_COOKIE, '', expires=0)
     response.set_cookie(SESSION_COOKIE, '', expires=0)
     return response

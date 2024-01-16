@@ -18,9 +18,9 @@ def set_user_role(username, role):
     return db_response.matched_count == 1
 
 # set a new session key and redirect to dashboard 
-def set_user_session_key():
+def set_user_session_key_and_redirect_to_dashboard():
     user_session_key = generate_session_key()
-    if update_user_session_key(username=request.form['username'], session_key=user_session_key, db=db):
+    if update_user_session_key(username=request.form['username'], session_key=user_session_key):
         response = make_response(redirect('/dashboard'))
         response.set_cookie(USERNAME_COOKIE, request.form['username'])
         response.set_cookie(SESSION_COOKIE, user_session_key)
@@ -30,7 +30,7 @@ def set_user_session_key():
 # check if the user is logged in and the session key matches the current session
 def is_user_valid(request):
     if request.cookies.get(USERNAME_COOKIE) != None and request.cookies.get(SESSION_COOKIE) != None:
-        return get_user_session_key(username=request.cookies.get(USERNAME_COOKIE), db=db) == request.cookies.get(SESSION_COOKIE)
+        return get_user_session_key(username=request.cookies.get(USERNAME_COOKIE)) == request.cookies.get(SESSION_COOKIE)
     return False
 
 # function to generate_session_key
